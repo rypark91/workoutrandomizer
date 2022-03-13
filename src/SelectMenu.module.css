@@ -1,0 +1,26 @@
+.formBox{
+  width: 170px;
+  text-align: left;
+  margin: 0 auto;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+input[type=radio], input[type=checkbox]{
+  transform: scale(1.5);
+}
+button{
+  border: none;
+  background-color: white;
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+  box-shadow: 0 4px #999999;
+}
+button:hover{
+  background-color: #dddddd;
+}
+button:active{
+  transform: translateY(2px);
+  background-color: #888888;
+  box-shadow: 0 2px #666666;
+}

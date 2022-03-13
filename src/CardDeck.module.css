@@ -1,0 +1,20 @@
+.cardsContainer{
+    width: 800px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 0 auto;
+
+}
+
+  @media only screen and (min-width: 657px) and (max-width: 824px){
+    .cardsContainer{
+      grid-template-columns: auto auto;
+      width: 600px;
+    }
+  }
+  @media only screen and (min-width: 310px) and (max-width: 657px){
+    .cardsContainer{
+      grid-template-columns: auto;
+      width: 300px;
+    }
+  }

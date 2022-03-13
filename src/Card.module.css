@@ -1,0 +1,28 @@
+.card{
+    width: 250px;
+    height: 350px;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    color: black;
+    margin-bottom: 20px;
+    font-weight: 600;
+    /* display: flex;
+    justify-content: center; */
+}
+hr{
+    width: 80%;
+}
+img{
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+    display: inline-block;
+    background-size: cover;
+    
+}
+
+p{
+    font-size: 15px;
+
+}
