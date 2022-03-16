@@ -422,21 +422,15 @@ let calfData = [
 ];
 
 //declares  and initializes the work out decks
-var deckCopy;
 var deck;
 
 function init(){
   deck = [];
-  deckCopy = [];
-  
 }
 
 //work out shuffling functions
-function shuffleChest(length, arr1, arr2){
-  for(var j  = 0; j < chestData.length; j++){
-    //copys chest data into a deck copy
-      deckCopy.push(chestData[j]);
-  }
+function shuffleWorkout(length, arr1, arr2){
+
   var i = 1;
   while(i <= length){
     //randomly selects a chest workout, removes it from the deck copy
@@ -447,25 +441,7 @@ function shuffleChest(length, arr1, arr2){
       i++;
   }
 }
-function shuffleBack(length, arr1, arr2){
-  for(var j  = 0; j < backData.length; j++){
-      deckCopy.push(backData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a back workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
 function shuffleLeg(length, arr1, arr2){
-  //copys leg data into a deck copy
-  for(var j  = 0; j < legData.length; j++){
-      deckCopy.push(legData[j]);
-  }
   var i = 1;
   while(i <= length){
     //randomly selects a leg workout, removes it from the deck copy
@@ -478,94 +454,16 @@ function shuffleLeg(length, arr1, arr2){
   num = Math.floor(Math.random() * calfData.length);
   arr2.push(calfData[num]);
 }
-function shuffleFrontSideShoulders(length, arr1, arr2){
-  //copys front side shoulders data into a deck copy
-  for(var j  = 0; j < frontSideShoulderData.length; j++){
-      deckCopy.push(frontSideShoulderData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a front and side shoulder workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
-function shuffleRearShoulders(length, arr1, arr2){
-  //copys rear shoulders data into a deck copy
-  for(var j  = 0; j < rearShoulderData.length; j++){
-      deckCopy.push(rearShoulderData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a rear shoulders workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
-function shuffleBicep(length, arr1, arr2){
-  //copys bicep data into a deck copy
-  for(var j  = 0; j < bicepData.length; j++){
-      deckCopy.push(bicepData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a bicep workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
-function shuffleTricep(length, arr1, arr2){
-  //copys tricep data into a deck copy
-  for(var j  = 0; j < tricepData.length; j++){
-      deckCopy.push(tricepData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a tricep workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
-function shuffleAb(length, arr1, arr2){
-  //copys ab data into a deck copy
-  for(var j  = 0; j < abData.length; j++){
-      deckCopy.push(abData[j]);
-  }
-  var i = 1;
-  while(i <= length){
-    //randomly selects a ab workout, removes it from the deck copy
-    //and pushes the workout in the real deck
-      var num = Math.floor(Math.random() * arr1.length);
-      arr2.push(arr1[num]);
-      arr1.splice(num, 1);
-      i++;
-  }
-}
+
 function shufflePush(){
-  shuffleChest(3,deckCopy,deck);
-  deckCopy = [];
-  shuffleFrontSideShoulders(2,deckCopy,deck);
-  deckCopy = [];
-  shuffleTricep(2, deckCopy, deck);
+  shuffleWorkout(3,chestData,deck);
+  shuffleWorkout(2,frontSideShoulderData,deck);
+  shuffleWorkout(2, tricepData, deck);
 }
 function shufflePull(){
-  shuffleBack(3,deckCopy,deck);
-  deckCopy = [];
-  shuffleRearShoulders(2,deckCopy,deck);
-  deckCopy = [];
-  shuffleBicep(2, deckCopy, deck);
+  shuffleWorkout(3,backData,deck);
+  shuffleWorkout(2,rearShoulderData,deck);
+  shuffleWorkout(2, bicepData, deck);
 }
 init();
 
@@ -577,25 +475,25 @@ function App() {
   const setWorkoutHander = (workoutData) => {
     
     if(workoutData.workout === 'chest'){
-      shuffleChest(6,deckCopy,deck);
+      shuffleWorkout(6,chestData,deck);
     }
     else if(workoutData.workout === 'back'){
-      shuffleBack(6,deckCopy,deck);
+      shuffleWorkout(6,backData,deck);
     }
     else if(workoutData.workout === 'leg'){
-      shuffleLeg(6,deckCopy,deck);
+      shuffleLeg(6,legData,deck);
     }
     else if(workoutData.workout === 'frontsideshoulder'){
-      shuffleFrontSideShoulders(6,deckCopy,deck);
+      shuffleWorkout(6,frontSideShoulderData,deck);
     }
     else if(workoutData.workout === 'rearshoulder'){
-      shuffleRearShoulders(6,deckCopy,deck);
+      shuffleWorkout(5,rearShoulderData,deck);
     }
     else if(workoutData.workout === 'bicep'){
-      shuffleBicep(6,deckCopy,deck);
+      shuffleWorkout(6,bicepData,deck);
     }
     else if(workoutData.workout === 'tricep'){
-      shuffleTricep(6,deckCopy,deck);
+      shuffleWorkout(5,tricepData,deck);
     }
     else if(workoutData.workout === 'push'){
       shufflePush();
@@ -604,8 +502,7 @@ function App() {
       shufflePull();
     }
     if(workoutData.ab){
-      deckCopy = [];
-      shuffleAb(3,deckCopy, deck);
+      shuffleWorkout(3,abData, deck);
     }
     setDeck(deck);
     setVisibleMenu(false);
