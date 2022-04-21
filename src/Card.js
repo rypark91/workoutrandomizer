@@ -2,7 +2,7 @@
 import classes from "./Card.module.css";
 
 const Card = (props) => {
-
+    console.log(props.recrepset)
     return (
         <div>
             <div className={classes.card}>

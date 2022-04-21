@@ -11,10 +11,15 @@ const SelectMenu = (props) => {
 
 
      const [workout, setWorkout] = useState('');
+     const [goal, setGoal] = useState('');
      const [ab, setAb] = useState(false);
 
-     const valueChangeHandler = (event) => {
+     const workoutChangeHandler = (event) => {
           setWorkout(event.target.value);
+     };
+     const goalChangeHandler = (event) => {
+          setGoal(event.target.value);
+
      };
      const abChangeHandler = (event) => {
           
@@ -24,95 +29,125 @@ const SelectMenu = (props) => {
           event.preventDefault();
           const workoutData = {
                workout: workout,
+               goal: goal,
                ab: ab
            };
           props.onSetWorkout(workoutData);
                   
      }
-     let disabled = !(workout.length);
+     let workoutDisabled = !(workout.length);
+     let goalDisabled = !(goal.length);
     let op = 0.5;
-    if(!disabled){
+    let opAll = 0.5;
+    if(!workoutDisabled){
         op = 1;
+        if(!goalDisabled){
+             opAll = 1;
+        }
 
     }
+    let finalDisabled = workoutDisabled || goalDisabled;
+    console.log(finalDisabled);
  
      return (
           <div>
-               <h3>Select Workout</h3>
               <form onSubmit={submitHandler} className={classes.formBox}>
-                  
+              <h3>Select Workout</h3>
                   <input type='radio' 
                          name='workout'
                        value='chest'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Chest</label>
                   <br/>
                   <input type='radio' 
                   name='workout'
                        value='back'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Back</label>
                   <br/>
                   <input type='radio' 
                   name='workout'
                        value='leg'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Leg</label>
                   <br/>
                   <input type='radio'
                   name='workout'
                        value='frontsideshoulder'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Front Side Shoulder</label>
                   <br/>
                   <input type='radio'
                   name='workout' 
                        value='rearshoulder'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Rear Shoulder</label>
                   <br/>
                   <input type='radio'
                   name='workout' 
                        value='bicep'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Bicep</label>
                   <br/>
                   <input type='radio'
                   name='workout' 
                        value='tricep'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Tricep</label>
                   <br/>
                   <input type='radio'
                   name='workout' 
                        value='push'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                   />
                   <label>Push</label>
                   <br/>
                   <input type='radio'
                   name='workout' 
                        value='pull'
-                       onChange={valueChangeHandler}
+                       onChange={workoutChangeHandler}
                        />
                        
                   <label>Pull</label>
                   <br/>
                   <input type='checkbox'
                     onChange={abChangeHandler}
-                    disabled={disabled}
+                    disabled={workoutDisabled}
+                    opacity={op}
                   />
                   <label>Core?</label>
                   <br/>
-                  
-                  <button type="submit" disabled={disabled} onSubmit={submitHandler} style={{opacity: op}}>Submit</button>
+                  <br/>
+                  <h3>Select Goal</h3>
+                  <input type='radio'
+                  name='goal' 
+                       value='strength'
+                       onChange={goalChangeHandler}
+                    />
+                   <label>Strength</label>
+                  <br/>
+                  <input type='radio'
+                  name='goal' 
+                       value='muscle'
+                       onChange={goalChangeHandler}
+                    />
+                   <label>Muscle Growth</label>
+                  <br/>
+                  <input type='radio'
+                  name='goal' 
+                       value='endurance'
+                       onChange={goalChangeHandler}
+                    />
+                   <label>Endurance</label>
+                  <br/>
+                  <button type="submit" disabled={finalDisabled} onSubmit={submitHandler} style={{opacity: opAll}}>Submit</button>
               </form>
           </div>
           );

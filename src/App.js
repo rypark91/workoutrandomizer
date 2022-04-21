@@ -472,6 +472,7 @@ function App() {
 
   const [visibleMenu, setVisibleMenu] = useState(true);
   const [workoutDeck, setDeck] = useState([]);
+  const [repSet, setRepSet] = useState("");
   const setWorkoutHander = (workoutData) => {
     
     if(workoutData.workout === 'chest'){
@@ -504,14 +505,25 @@ function App() {
     if(workoutData.ab){
       shuffleWorkout(3,abData, deck);
     }
+    if(workoutData.goal === "strength"){
+      setRepSet("3x4");
+    }
+    else if(workoutData.goal === "muscle"){
+      setRepSet("3x9");
+    }
+    else if(workoutData.goal === "endurance"){
+      setRepSet("3x15");
+    }
     setDeck(deck);
     setVisibleMenu(false);
+    
   };
   return (
     <div className="App">
       <h1>Workout Randomizer</h1>
       {visibleMenu && <SelectMenu onSetWorkout={setWorkoutHander} />}
-      <CardDeck cards={workoutDeck} />
+      <CardDeck cards={workoutDeck} repSet={repSet}/>
+      <p>Website created by Ryan Park &copy;2022 </p>
 
     </div>
   );
